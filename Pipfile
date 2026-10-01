@@ -14,6 +14,7 @@ passlib = "*"
 bcrypt = "==4.0.1"
 pyjwt = "*"
 alembic = "*"
+psycopg = {extras = ["binary"], version = "*"}
 
 [dev-packages]
 pytest = "*"
@@ -21,4 +22,4 @@ starlette = "*"
 httpx = "*"
 
 [requires]
-python_version = "3.12"
+python_version = "3.13"
