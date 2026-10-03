@@ -12,9 +12,11 @@ def test_register_user(
 ):
     # Data for registering a new user
     user_data = {
-        "username": "registerTestUser123",
+        "name": "Register Test User",
         "email": "register-test@example.com",
+        "phone": "33333333",
         "password": "mys3cretp2ssw0rd",
+        "role": "applicant",
     }
 
     # Send a POST request to register the user
@@ -30,12 +32,15 @@ def test_register_user(
     # Verify the user was created in the database
     user = (
         test_db.query(UserModel)
-        .filter(UserModel.username == user_data["username"])
+        .filter(UserModel.email == user_data["email"])
         .first()
     )
+
     assert user is not None
-    assert user.username == user_data["username"]
+    assert user.name == user_data["name"]
     assert user.email == user_data["email"]
+    assert user.phone == user_data["phone"]
+    assert user.role == user_data["role"]
 
 
 def test_get_current_user(
@@ -45,16 +50,23 @@ def test_get_current_user(
 ):
     # Create a new mock user in the test database
     user = UserModel(
-        username="currentUser123",
+        name="Current User",
         email="current-user@example.com",
+        phone="44444444",
+        role="applicant",
     )
+
     user.set_password("mys3cretp2ssw0rd")
     test_db.add(user)
     test_db.commit()
     test_db.refresh(user)
 
     # Use the login helper to generate authentication headers
-    headers = login(test_app, "currentUser123", "mys3cretp2ssw0rd")
+    headers = login(
+        test_app,
+        "current-user@example.com",
+        "mys3cretp2ssw0rd"
+    )
 
     # Send a GET request for the authenticated user
     response = test_app.get("/api/current_user", headers=headers)
@@ -63,5 +75,5 @@ def test_get_current_user(
     assert response.status_code == 200
     data = response.json()
     assert data["id"] == user.id
-    assert data["username"] == user.username
+    assert data["name"] == user.name
     assert data["email"] == user.email
