@@ -9,6 +9,7 @@ from fastapi import FastAPI
 # Controllers
 from controllers.users import router as UsersRouter
 from controllers.job_posts import router as JobPostsRouter
+from controllers.applications import router as ApplicationsRouter
 
 
 app = FastAPI()
@@ -29,9 +30,8 @@ app.add_middleware(
 
 app.include_router(UsersRouter, prefix='/api')
 app.include_router(JobPostsRouter, prefix='/api')
+app.include_router(ApplicationsRouter, prefix='/api')
 
 @app.get('/health')
 def health_check():
   return {'message': 'Api is running'}
-
-
