@@ -16,13 +16,13 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(http_be
   try:
     # Decode the token using the secret key
     payload = jwt.decode(token.credentials, JWT_SECRET, algorithms=["HS256"])
-    current_user_id =  payload.get("sub")
+    current_user_id = int(payload.get("sub"))
 
     user = db.query(UserModel).filter(UserModel.id == current_user_id).first()
 
     if not user:
       raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
-                              detail="Invalid username or password")
+                              detail="User not found")
   except DecodeError as err:
      raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                           detail=f'Could not decode token: {str(err)}')
@@ -36,6 +36,3 @@ def get_current_user(db: Session = Depends(get_db), token: str = Depends(http_be
      raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail='Token invalid')
   return user
-
-
-

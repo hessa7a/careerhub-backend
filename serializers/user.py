@@ -2,24 +2,32 @@
 
 from pydantic import BaseModel
 
+
 # Form Validations
 class UserRegistrationSchema(BaseModel):
-    username: str  # User's unique name
-    email: str  # User's email address
-    password: str  # Plain text password for user registration (will be hashed before saving)
+    name: str
+    email: str
+    phone: str
+    password: str
+    role: str
+
 
 class UserLoginSchema(BaseModel):
-    username: str  # User's unique name
-    password: str  # Plain text password for user registration (will be hashed before saving)
+    email: str
+    password: str
+
 
 # Response Schemas
 class UserSchema(BaseModel):
     id: int
-    username: str
+    name: str
     email: str
+    phone: str
+    role: str
 
     class Config:
         orm_mode = True
+
 
 class UserTokenSchema(BaseModel):
     token: str
