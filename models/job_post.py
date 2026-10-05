@@ -40,5 +40,6 @@ class JobPostModel(BaseModel):
 
     applications = relationship(
         "ApplicationModel",
-        back_populates="job_post"
+        back_populates="job_post",
+        cascade="all, delete-orphan"
     )
