@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from datetime import datetime
 
+from serializers.user import UserSchema
+
 
 class ApplicationCreateSchema(BaseModel):
     job_post_id: int
@@ -20,6 +22,7 @@ class ApplicationSchema(BaseModel):
     resume: str | None = None
     applicant_id: int
     job_post_id: int
+    applicant: UserSchema
 
     class Config:
         orm_mode = True

@@ -75,7 +75,9 @@ def update_job(
     job.requirements = job_data.requirements
     job.location = job_data.location
     job.job_type = job_data.job_type
-    job.status = job_data.status
+
+    if job_data.status:
+        job.status = job_data.status
 
     db.commit()
     db.refresh(job)

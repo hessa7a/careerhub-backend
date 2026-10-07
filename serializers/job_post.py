@@ -16,7 +16,7 @@ class JobPostUpdateSchema(BaseModel):
     requirements: str
     location: str
     job_type: str
-    status: str
+    status: str | None = None
 
 
 class JobPostSchema(BaseModel):

@@ -67,6 +67,21 @@ def get_my_applications(
     return applications
 
 
+@router.get("/applications/company", response_model=list[ApplicationSchema])
+def get_company_applications(
+    db: Session = Depends(get_db),
+    current_user: UserModel = Depends(get_current_user)
+):
+    if current_user.role != "company":
+        raise HTTPException(status_code=403, detail="Only companies can view applications")
+
+    applications = db.query(ApplicationModel).join(JobPostModel).filter(
+        JobPostModel.company_id == current_user.id
+    ).all()
+
+    return applications
+
+
 @router.get("/jobs/{job_id}/applications", response_model=list[ApplicationSchema])
 def get_job_applications(
     job_id: int,
