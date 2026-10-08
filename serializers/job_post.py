@@ -30,5 +30,6 @@ class JobPostSchema(BaseModel):
     posted_date: datetime
     company_id: int
 
-    class Config:
-        orm_mode = True
+    model_config = {
+    "from_attributes": True
+}

@@ -24,5 +24,6 @@ class ApplicationSchema(BaseModel):
     job_post_id: int
     applicant: UserSchema
 
-    class Config:
-        orm_mode = True
+    model_config = {
+    "from_attributes": True
+}
