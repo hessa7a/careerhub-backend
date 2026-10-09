@@ -1,6 +1,6 @@
 # CareerHub
 
-![CareerHub Logo](./src/assets/logo.png)
+![CareerHub Logo](./assets/logo.png)
 
 ## Description
 
@@ -40,9 +40,9 @@ CareerHub is a job and internship platform where companies can post opportunitie
 
 ### Planning Materials
 
-![CareerHub ERD](./src/assets/11.png)
-![CareerHub Wireframes](./src/assets/wireframes.png)
-![CareerHub Screenshot](./src/assets/Screenshot.png)
+![CareerHub ERD](./assets/11.png)
+![CareerHub Wireframes](./assets/wireframes.png)
+![CareerHub Screenshot](./assets/Screenshot.png)
 
 ## Front-End Repository
 https://github.com/hessa7a/careerhub-frontend
